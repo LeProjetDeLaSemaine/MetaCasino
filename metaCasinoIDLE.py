@@ -22,9 +22,8 @@ class MetaCasino(type):
         attributs["nombreDInfractions"] = 0
         return type.__new__(metacls, nom, bases, attributs)
         
-class Roulette:
-    __metaclass__ = MetaCasino
-        
+class Roulette(metaclass = MetaCasino):
+            
     def __init__(self):
         #on met des self partout pour faire plaisir à python
         print("Roulette: La roulette possède 50 cases numérotées de 0 à 49. Les cases impaires sont noires, les cases paires sont rouges. Si vous tombez sur la case sur laquelle vous avez parié, votre mise est triplée. Si vous tombez sur une case de même couleur, on vous rend 150% de la mise, sinon, la mise est perdue\n")
@@ -85,8 +84,7 @@ class Roulette:
             self.Sortez("Tricherie")
             raise ValueError
                     
-class Machine_a_sous:
-    __metaclass__ = MetaCasino
+class Machine_a_sous(metaclass = MetaCasino):
     pass
     
 activite = str(input("choisissez l'activité:"))
