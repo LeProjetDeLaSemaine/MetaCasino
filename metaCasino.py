@@ -7,8 +7,11 @@ print("Liste des activités:")
 
 def FoutreLeClientDehors(self,raison):
     print("On vous a jeté hors du Casino. Motif: {}".format(raison))
-
-def infraction(self):
+    
+class mustInheritsInfraction:
+    nombreDInfractions = 0 #compte les infractions
+    
+    def infraction(self):  #incremente nombreDInfractions, retourne une AssertionError lors que nombreDInfractions == 5
         self.nombreDInfractions += 1
         assert(self.nombreDInfractions != 5)
 
@@ -26,9 +29,9 @@ class MetaCasino(type):
         print("\t{}".format(nom))                   #affichage de la liste des activités
         attributs["Sortez"] = FoutreLeClientDehors
         attributs["pognon"] = 1000                  #argent disponible dans les differentes activités
-        attributs["nombreDInfractions"] = 0         #compte les infractions
-        attributs["infraction"] = infraction        #incremente nombreDInfractions, retourne une AssertionError lors que nombreDInfractions == 5
-        return type.__new__(metacls, nom, bases, attributs)
+        lBases = list(bases)
+        lBases.extend([mustInheritsInfraction ,object])
+        return type.__new__(metacls, nom, tuple(lBases), attributs)
         
 class Roulette(metaclass = MetaCasino):
     #Roulette est classe ayant pour métaclasse MetaCasino
